@@ -8,6 +8,7 @@ using DevExpress.DataAccess.Excel;
 using DevExpress.XtraEditors.Repository;
 using System.Drawing;
 using System.Diagnostics;
+using DevExpress.XtraEditors.Controls;
 
 namespace Create_ProductPlan
 {
@@ -35,7 +36,34 @@ namespace Create_ProductPlan
 
         private void Form_Main_Load(object sender, System.EventArgs e)
         {
+            CreateRadioEditors();
             Define_GridView();
+        }
+
+        private void CreateRadioEditors()
+        {
+            // Creating and initializing the radio group items
+            RadioGroupItem rdBtnTVC1 = new RadioGroupItem();
+            rdBtnTVC1.Value = "1";
+            rdBtnTVC1.Description = "TVC1";
+
+            RadioGroupItem rdBtnTVC2 = new RadioGroupItem();
+            rdBtnTVC2.Value = "2";
+            rdBtnTVC2.Description = "TVC2";
+
+            radioGroupSiteID.Properties.Items.Add(rdBtnTVC1);
+            radioGroupSiteID.Properties.Items.Add(rdBtnTVC2);
+        }
+
+        private bool Check_Error()
+        {
+            if (radioGroupSiteID.EditValue == null)
+            {
+                MessageBox.Show("Chưa chọn Site ID", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                radioGroupSiteID.Focus();
+                return false;
+            }
+            return true;
         }
 
         private void Define_GridView()
@@ -151,6 +179,11 @@ namespace Create_ProductPlan
 
         private void barBtn_ImportData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if(!Check_Error())
+            {
+                return;
+            }   
+            
             //Get link file excel
             OpenFileDialog theinputDialog = new OpenFileDialog
             {
@@ -192,9 +225,9 @@ namespace Create_ProductPlan
                 tableImport.Columns.Add("ITEMBATCHNUMBER");
                 tableImport.Columns.Add("PARENTPRODUCTIONORDERNUMBER");
                 tableImport.Columns.Add("PRODUCTIONPOOLID");
-                tableImport.Columns.Add("PRODUCTIONSITEID");
+                tableImport.Columns.Add("PRODUCTIONSITEID", typeof(int));
                 tableImport.Columns.Add("PRODUCTIONWAREHOUSEID");
-                tableImport.Columns.Add("SCHEDULEDQUANTITY");
+                tableImport.Columns.Add("SCHEDULEDQUANTITY",typeof(int));
                 tableImport.Columns.Add("SOURCEBOMID");
                 tableImport.Columns.Add("SOURCEROUTEID");
                 tableImport.Columns.Add("DEFAULTLEDGERDIMENSIONDISPLAYVALUE");
@@ -220,8 +253,9 @@ namespace Create_ProductPlan
                                 {
                                     DataRow dtrow = tableImport.NewRow();
                                     dtrow["ITEMNUMBER"] = Convert.ToString(row.Field<string>("Item Code"));
-                                    dtrow["DELIVERYDATE"] = Convert.ToDateTime(columnName).ToString("dd/MM/yyyy");
-                                    dtrow["SCHEDULEDQUANTITY"] = scheduleQuantity;
+                                    dtrow["DELIVERYDATE"] = Convert.ToDateTime(columnName).ToString("MM/dd/yyyy");
+                                    dtrow["SCHEDULEDQUANTITY"] = Convert.ToInt16(scheduleQuantity);
+                                    dtrow["PRODUCTIONSITEID"] = Convert.ToInt16(radioGroupSiteID.EditValue);
                                     tableImport.Rows.Add(dtrow);
                                 }
                             }

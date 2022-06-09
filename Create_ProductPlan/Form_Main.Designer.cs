@@ -39,19 +39,24 @@
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.radioGroupSiteID = new DevExpress.XtraEditors.RadioGroup();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_ProductPlan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Product_Import_View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
+            this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupSiteID.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl_ProductPlan
             // 
             this.gridControl_ProductPlan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl_ProductPlan.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridControl_ProductPlan.Location = new System.Drawing.Point(0, 158);
+            this.gridControl_ProductPlan.Location = new System.Drawing.Point(0, 201);
             this.gridControl_ProductPlan.MainView = this.Product_Import_View;
             this.gridControl_ProductPlan.Name = "gridControl_ProductPlan";
-            this.gridControl_ProductPlan.Size = new System.Drawing.Size(905, 482);
+            this.gridControl_ProductPlan.Size = new System.Drawing.Size(905, 439);
             this.gridControl_ProductPlan.TabIndex = 0;
             this.gridControl_ProductPlan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.Product_Import_View});
@@ -125,21 +130,53 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ImportData);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
+            // panelTop
+            // 
+            this.panelTop.Controls.Add(this.radioGroupSiteID);
+            this.panelTop.Controls.Add(this.label1);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 158);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(905, 43);
+            this.panelTop.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(12, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Site ID";
+            // 
+            // radioGroupSiteID
+            // 
+            this.radioGroupSiteID.Location = new System.Drawing.Point(67, 6);
+            this.radioGroupSiteID.MenuManager = this.ribbonControl;
+            this.radioGroupSiteID.Name = "radioGroupSiteID";
+            this.radioGroupSiteID.Size = new System.Drawing.Size(188, 30);
+            this.radioGroupSiteID.TabIndex = 1;
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 640);
             this.Controls.Add(this.gridControl_ProductPlan);
+            this.Controls.Add(this.panelTop);
             this.Controls.Add(this.ribbonControl);
             this.IconOptions.Image = ((System.Drawing.Image)(resources.GetObject("Form_Main.IconOptions.Image")));
             this.Name = "Form_Main";
             this.Ribbon = this.ribbonControl;
-            this.Text = "Form";
+            this.Text = "CREATE TEMPLATE PRODUCT PLAN IMPORT D365";
             this.Load += new System.EventHandler(this.Form_Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_ProductPlan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Product_Import_View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupSiteID.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +194,8 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraGrid.Views.Grid.GridView Product_Import_View;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.RadioGroup radioGroupSiteID;
     }
 }
