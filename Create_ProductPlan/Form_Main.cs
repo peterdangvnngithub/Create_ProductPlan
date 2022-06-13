@@ -55,17 +55,6 @@ namespace Create_ProductPlan
             radioGroupSiteID.Properties.Items.Add(rdBtnTVC2);
         }
 
-        private bool Check_Error()
-        {
-            if (radioGroupSiteID.EditValue == null)
-            {
-                MessageBox.Show("Chưa chọn Site ID", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                radioGroupSiteID.Focus();
-                return false;
-            }
-            return true;
-        }
-
         private void Define_GridView()
         {
             Product_Import_View.OptionsPrint.AutoWidth = false;
@@ -78,6 +67,7 @@ namespace Create_ProductPlan
             gridCol_Production_Order_Number.VisibleIndex = 0;
             gridCol_Production_Order_Number.Width = 140;
 
+            // DELIVERY DATE
             gridCol_Delivery_Date.Name = "gridCol_Delivery_Date";
             gridCol_Delivery_Date.Caption = "DELIVERYDATE";
             gridCol_Delivery_Date.FieldName = "DELIVERYDATE";
@@ -87,6 +77,7 @@ namespace Create_ProductPlan
             gridCol_Delivery_Date.AppearanceCell.Options.UseTextOptions = true;
             gridCol_Delivery_Date.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
 
+            // ITEM NUMBER
             gridCol_Item_Number.Name = "gridCol_Item_Number";
             gridCol_Item_Number.Caption = "ITEMNUMBER";
             gridCol_Item_Number.FieldName = "ITEMNUMBER";
@@ -95,36 +86,42 @@ namespace Create_ProductPlan
             gridCol_Item_Number.AppearanceCell.Options.UseTextOptions = true;
             gridCol_Item_Number.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
 
+            // ITEM BATCH NUMBER
             gridCol_Item_Batch_Number.Name = "gridCol_Item_Batch_Number";
             gridCol_Item_Batch_Number.Caption = "ITEMBATCHNUMBER";
             gridCol_Item_Batch_Number.FieldName = "ITEMBATCHNUMBER";
             gridCol_Item_Batch_Number.VisibleIndex = 0;
             gridCol_Item_Batch_Number.Width = 80;
 
+            // PARENT PRODUCTION ORDER NUMBER
             gridCol_Parent_Production_Order_Number.Name = "gridCol_Parent_Production_Order_Number";
             gridCol_Parent_Production_Order_Number.Caption = "PARENTPRODUCTIONORDERNUMBER";
             gridCol_Parent_Production_Order_Number.FieldName = "PARENTPRODUCTIONORDERNUMBER";
             gridCol_Parent_Production_Order_Number.VisibleIndex = 0;
             gridCol_Parent_Production_Order_Number.Width = 135;
 
+            // PRODUCTION POOL ID
             gridCol_Production_Pool_ID.Name = "gridCol_Production_Pool_ID";
             gridCol_Production_Pool_ID.Caption = "PRODUCTIONPOOLID";
             gridCol_Production_Pool_ID.FieldName = "PRODUCTIONPOOLID";
             gridCol_Production_Pool_ID.VisibleIndex = 0;
             gridCol_Production_Pool_ID.Width = 90;
 
+            // PRODUCTION SITE ID
             gridCol_Production_Site_ID.Name = "gridCol_Production_Site_ID";
             gridCol_Production_Site_ID.Caption = "PRODUCTIONSITEID";
             gridCol_Production_Site_ID.FieldName = "PRODUCTIONSITEID";
             gridCol_Production_Site_ID.VisibleIndex = 0;
             gridCol_Production_Site_ID.Width = 92;
 
+            // PRODUCTION WARE HOUSE ID
             gridCol_Production_Warehouse_ID.Name = "gridCol_Production_Warehouse_ID";
             gridCol_Production_Warehouse_ID.Caption = "PRODUCTIONWAREHOUSEID";
             gridCol_Production_Warehouse_ID.FieldName = "PRODUCTIONWAREHOUSEID";
             gridCol_Production_Warehouse_ID.VisibleIndex = 0;
             gridCol_Production_Warehouse_ID.Width = 80;
 
+            // SCHEDULED QUANTITY
             gridCol_Schedule_Quantity.Name = "gridCol_Schedule_Quantity";
             gridCol_Schedule_Quantity.Caption = "SCHEDULEDQUANTITY";
             gridCol_Schedule_Quantity.FieldName = "SCHEDULEDQUANTITY";
@@ -135,24 +132,28 @@ namespace Create_ProductPlan
             gridCol_Schedule_Quantity.DisplayFormat.FormatString = "#,##0";
             gridCol_Schedule_Quantity.DisplayFormat.FormatType = FormatType.Numeric;
 
+            //SOURCE BOM ID
             gridCol_Source_Bom_ID.Name = "gridCol_Source_Bom_ID";
             gridCol_Source_Bom_ID.Caption = "SOURCEBOMID";
             gridCol_Source_Bom_ID.FieldName = "SOURCEBOMID";
             gridCol_Source_Bom_ID.VisibleIndex = 0;
             gridCol_Source_Bom_ID.Width = 150;
 
+            // SOURCE ROUTE ID
             gridCol_Source_Route_ID.Name = "gridCol_Source_Route_ID";
             gridCol_Source_Route_ID.Caption = "SOURCEROUTEID";
             gridCol_Source_Route_ID.FieldName = "SOURCEROUTEID";
             gridCol_Source_Route_ID.VisibleIndex = 0;
             gridCol_Source_Route_ID.Width = 150;
 
+            // DEFAULT LEDGER DIMENSION DISPLAY VALUE
             gridCol_Default_Ledge_Dimension_Display_Value.Name = "gridCol_Default_Ledge_Dimension_Display_Value";
             gridCol_Default_Ledge_Dimension_Display_Value.Caption = "DEFAULTLEDGERDIMENSIONDISPLAYVALUE";
             gridCol_Default_Ledge_Dimension_Display_Value.FieldName = "DEFAULTLEDGERDIMENSIONDISPLAYVALUE";
             gridCol_Default_Ledge_Dimension_Display_Value.VisibleIndex = 0;
             gridCol_Default_Ledge_Dimension_Display_Value.Width = 190;
 
+            // Add column to gridview
             Product_Import_View.Columns.Add(gridCol_Production_Order_Number);
             Product_Import_View.Columns.Add(gridCol_Delivery_Date);
             Product_Import_View.Columns.Add(gridCol_Item_Number);
@@ -166,6 +167,7 @@ namespace Create_ProductPlan
             Product_Import_View.Columns.Add(gridCol_Source_Route_ID);
             Product_Import_View.Columns.Add(gridCol_Default_Ledge_Dimension_Display_Value);
 
+            // Set common attribute
             foreach (GridColumn c in Product_Import_View.Columns)
             {
                 c.AppearanceHeader.Options.UseFont = true;
@@ -175,6 +177,18 @@ namespace Create_ProductPlan
                 c.AppearanceHeader.ForeColor = Color.Black;
                 c.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
             }
+        }
+
+
+        private bool Check_Error()
+        {
+            if (radioGroupSiteID.EditValue == null)
+            {
+                MessageBox.Show("Chưa chọn Site ID", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                radioGroupSiteID.Focus();
+                return false;
+            }
+            return true;
         }
 
         private void barBtn_ImportData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -199,6 +213,9 @@ namespace Create_ProductPlan
             };
 
                 // Select a required worksheet.
+                // 0: sheet 1
+                // 1: sheet 2
+                // 2: sheet 3
                 ExcelWorksheetSettings excelWorksheetSettings = new ExcelWorksheetSettings
                 {
                     WorksheetIndex = 0
@@ -212,12 +229,14 @@ namespace Create_ProductPlan
                     SkipHiddenColumns = true,
                     UseFirstRowAsHeader = true
                 };
+
                 excelDataSource.SourceOptions = excelSourceOptions;
 
                 excelDataSource.Fill();
 
                 tablePlan = excelDataSource.ExcelToDataTable();
 
+                //Table containing data displayed on gridview
                 DataTable tableImport = new DataTable();
                 tableImport.Columns.Add("PRODUCTIONORDERNUMBER");
                 tableImport.Columns.Add("DELIVERYDATE");
@@ -232,20 +251,22 @@ namespace Create_ProductPlan
                 tableImport.Columns.Add("SOURCEROUTEID");
                 tableImport.Columns.Add("DEFAULTLEDGERDIMENSIONDISPLAYVALUE");
 
-                // On all tables' rows
+                // Loop all tables rows
                 foreach (DataRow row in tablePlan.Rows)
                 {
-
                     int count = 0;
-                    // On all tables' columns
+                    // Loop all tables columns
                     foreach (DataColumn col in tablePlan.Columns)
                     {
-                        if (col.ColumnName == "No" || col.ColumnName == "Group" || col.ColumnName == "Total" || col.ColumnName == "Item Code")
+                        if (col.ColumnName == "No" 
+                            || col.ColumnName == "Group" 
+                            || col.ColumnName == "Total" 
+                            || col.ColumnName == "Item Code")
                         {
                         } else
                         {
-                            string columnName = col.ColumnName;
-                            var scheduleQuantity = row[count];
+                            string columnName = col.ColumnName; // Get the current column header
+                            var scheduleQuantity = row[count];  // Get the current quantity
 
                             if (scheduleQuantity != DBNull.Value)
                             {
@@ -275,6 +296,7 @@ namespace Create_ProductPlan
                 {
                     string path = theoutputDialog.FileName;
 
+                    // Export gridview data to excel type .Xlsx
                     gridControl_ProductPlan.ExportToXlsx(path);
 
                     // Open the created XLSX file with the default application.
