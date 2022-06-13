@@ -40,8 +40,9 @@
             this.ribbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.radioGroupSiteID = new DevExpress.XtraEditors.RadioGroup();
+            this.label1 = new System.Windows.Forms.Label();
+            this.barBtn_ClearData = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_ProductPlan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Product_Import_View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -76,9 +77,10 @@
             this.skinDropDownButtonItem,
             this.skinPaletteRibbonGalleryBarItem,
             this.barBtn_ImportData,
-            this.barButtonItem1});
+            this.barButtonItem1,
+            this.barBtn_ClearData});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 5;
+            this.ribbonControl.MaxItemId = 6;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage});
@@ -103,7 +105,7 @@
             // 
             // barBtn_ImportData
             // 
-            this.barBtn_ImportData.Caption = "Import Data";
+            this.barBtn_ImportData.Caption = "&Import Data";
             this.barBtn_ImportData.Id = 2;
             this.barBtn_ImportData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtn_ImportData.ImageOptions.Image")));
             this.barBtn_ImportData.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtn_ImportData.ImageOptions.LargeImage")));
@@ -128,6 +130,7 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ImportData);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ClearData);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // panelTop
@@ -140,6 +143,14 @@
             this.panelTop.Size = new System.Drawing.Size(905, 43);
             this.panelTop.TabIndex = 2;
             // 
+            // radioGroupSiteID
+            // 
+            this.radioGroupSiteID.Location = new System.Drawing.Point(67, 6);
+            this.radioGroupSiteID.MenuManager = this.ribbonControl;
+            this.radioGroupSiteID.Name = "radioGroupSiteID";
+            this.radioGroupSiteID.Size = new System.Drawing.Size(188, 30);
+            this.radioGroupSiteID.TabIndex = 1;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -150,13 +161,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Site ID";
             // 
-            // radioGroupSiteID
+            // barBtn_ClearData
             // 
-            this.radioGroupSiteID.Location = new System.Drawing.Point(67, 6);
-            this.radioGroupSiteID.MenuManager = this.ribbonControl;
-            this.radioGroupSiteID.Name = "radioGroupSiteID";
-            this.radioGroupSiteID.Size = new System.Drawing.Size(188, 30);
-            this.radioGroupSiteID.TabIndex = 1;
+            this.barBtn_ClearData.Caption = "&Clear Data";
+            this.barBtn_ClearData.Id = 5;
+            this.barBtn_ClearData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
+            this.barBtn_ClearData.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
+            this.barBtn_ClearData.Name = "barBtn_ClearData";
+            this.barBtn_ClearData.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn_ClearData_ItemClick);
             // 
             // Form_Main
             // 
@@ -197,5 +209,6 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.RadioGroup radioGroupSiteID;
+        private DevExpress.XtraBars.BarButtonItem barBtn_ClearData;
     }
 }

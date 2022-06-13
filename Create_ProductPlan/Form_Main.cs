@@ -282,6 +282,12 @@ namespace Create_ProductPlan
                 }    
             }
         }
+
+        private void barBtn_ClearData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gridControl_ProductPlan.DataSource=null;
+            radioGroupSiteID.EditValue=false;
+        }
     }
 }
 
