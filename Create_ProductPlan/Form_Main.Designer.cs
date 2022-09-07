@@ -35,14 +35,15 @@
             this.skinRibbonGalleryBarItem = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
             this.skinDropDownButtonItem = new DevExpress.XtraBars.SkinDropDownButtonItem();
             this.skinPaletteRibbonGalleryBarItem = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
-            this.barBtn_ImportData = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtn_ImportDataPlan = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtn_ClearData = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtn_ImportMasterD365 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.panelTop = new System.Windows.Forms.Panel();
             this.radioGroupSiteID = new DevExpress.XtraEditors.RadioGroup();
             this.label1 = new System.Windows.Forms.Label();
-            this.barBtn_ClearData = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_ProductPlan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Product_Import_View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -76,11 +77,12 @@
             this.skinRibbonGalleryBarItem,
             this.skinDropDownButtonItem,
             this.skinPaletteRibbonGalleryBarItem,
-            this.barBtn_ImportData,
+            this.barBtn_ImportDataPlan,
             this.barButtonItem1,
-            this.barBtn_ClearData});
+            this.barBtn_ClearData,
+            this.barBtn_ImportMasterD365});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 6;
+            this.ribbonControl.MaxItemId = 7;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage});
@@ -103,14 +105,14 @@
             this.skinPaletteRibbonGalleryBarItem.Id = 3;
             this.skinPaletteRibbonGalleryBarItem.Name = "skinPaletteRibbonGalleryBarItem";
             // 
-            // barBtn_ImportData
+            // barBtn_ImportDataPlan
             // 
-            this.barBtn_ImportData.Caption = "&Import Data";
-            this.barBtn_ImportData.Id = 2;
-            this.barBtn_ImportData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtn_ImportData.ImageOptions.Image")));
-            this.barBtn_ImportData.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtn_ImportData.ImageOptions.LargeImage")));
-            this.barBtn_ImportData.Name = "barBtn_ImportData";
-            this.barBtn_ImportData.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn_ImportData_ItemClick);
+            this.barBtn_ImportDataPlan.Caption = "&Import Data Plan";
+            this.barBtn_ImportDataPlan.Id = 2;
+            this.barBtn_ImportDataPlan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtn_ImportDataPlan.ImageOptions.Image")));
+            this.barBtn_ImportDataPlan.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtn_ImportDataPlan.ImageOptions.LargeImage")));
+            this.barBtn_ImportDataPlan.Name = "barBtn_ImportDataPlan";
+            this.barBtn_ImportDataPlan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn_ImportData_ItemClick);
             // 
             // barButtonItem1
             // 
@@ -119,6 +121,24 @@
             this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
             this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
             this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barBtn_ClearData
+            // 
+            this.barBtn_ClearData.Caption = "&Clear Data";
+            this.barBtn_ClearData.Id = 5;
+            this.barBtn_ClearData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtn_ClearData.ImageOptions.Image")));
+            this.barBtn_ClearData.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtn_ClearData.ImageOptions.LargeImage")));
+            this.barBtn_ClearData.Name = "barBtn_ClearData";
+            this.barBtn_ClearData.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn_ClearData_ItemClick);
+            // 
+            // barBtn_ImportMasterD365
+            // 
+            this.barBtn_ImportMasterD365.Caption = "Import Data Master D365";
+            this.barBtn_ImportMasterD365.Id = 6;
+            this.barBtn_ImportMasterD365.ImageOptions.Image = global::Create_ProductPlan.Properties.Resources.exporttoxlsx_16x16;
+            this.barBtn_ImportMasterD365.ImageOptions.LargeImage = global::Create_ProductPlan.Properties.Resources.exporttoxlsx_32x32;
+            this.barBtn_ImportMasterD365.Name = "barBtn_ImportMasterD365";
+            this.barBtn_ImportMasterD365.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn_ImportMasterD365_ItemClick);
             // 
             // ribbonPage
             // 
@@ -129,7 +149,8 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ImportData);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ImportDataPlan);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ImportMasterD365);
             this.ribbonPageGroup1.ItemLinks.Add(this.barBtn_ClearData);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
@@ -160,15 +181,6 @@
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Site ID";
-            // 
-            // barBtn_ClearData
-            // 
-            this.barBtn_ClearData.Caption = "&Clear Data";
-            this.barBtn_ClearData.Id = 5;
-            this.barBtn_ClearData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
-            this.barBtn_ClearData.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
-            this.barBtn_ClearData.Name = "barBtn_ClearData";
-            this.barBtn_ClearData.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtn_ClearData_ItemClick);
             // 
             // Form_Main
             // 
@@ -202,7 +214,7 @@
         private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem;
         private DevExpress.XtraBars.SkinDropDownButtonItem skinDropDownButtonItem;
         private DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem skinPaletteRibbonGalleryBarItem;
-        private DevExpress.XtraBars.BarButtonItem barBtn_ImportData;
+        private DevExpress.XtraBars.BarButtonItem barBtn_ImportDataPlan;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraGrid.Views.Grid.GridView Product_Import_View;
@@ -210,5 +222,6 @@
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.RadioGroup radioGroupSiteID;
         private DevExpress.XtraBars.BarButtonItem barBtn_ClearData;
+        private DevExpress.XtraBars.BarButtonItem barBtn_ImportMasterD365;
     }
 }
