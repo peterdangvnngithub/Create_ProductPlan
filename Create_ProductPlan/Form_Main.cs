@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Diagnostics;
 using DevExpress.XtraEditors.Controls;
 using System.Linq;
-using System.Collections.Generic;
+using System.IO;
 
 namespace Create_ProductPlan
 {
@@ -107,9 +107,11 @@ namespace Create_ProductPlan
             gridCol_Delivery_Date.FieldName = "DELIVERYDATE";
             gridCol_Delivery_Date.ColumnEdit = new RepositoryItemDateEdit();
             gridCol_Delivery_Date.VisibleIndex = 0;
-            gridCol_Delivery_Date.Width = 104;
+            gridCol_Delivery_Date.Width = 120;
             gridCol_Delivery_Date.AppearanceCell.Options.UseTextOptions = true;
             gridCol_Delivery_Date.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridCol_Delivery_Date.DisplayFormat.FormatString = "dd/MM/yyyy";
+            gridCol_Delivery_Date.DisplayFormat.FormatType = FormatType.DateTime;
 
             // ITEM NUMBER
             gridCol_Item_Number.Name = "gridCol_Item_Number";
@@ -118,14 +120,14 @@ namespace Create_ProductPlan
             gridCol_Item_Number.VisibleIndex = 0;
             gridCol_Item_Number.Width = 120;
             gridCol_Item_Number.AppearanceCell.Options.UseTextOptions = true;
-            gridCol_Item_Number.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridCol_Item_Number.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Near;
 
             // ITEM BATCH NUMBER
             gridCol_Item_Batch_Number.Name = "gridCol_Item_Batch_Number";
             gridCol_Item_Batch_Number.Caption = "ITEMBATCHNUMBER";
             gridCol_Item_Batch_Number.FieldName = "ITEMBATCHNUMBER";
             gridCol_Item_Batch_Number.VisibleIndex = 0;
-            gridCol_Item_Batch_Number.Width = 80;
+            gridCol_Item_Batch_Number.Width = 100;
 
             // PARENT PRODUCTION ORDER NUMBER
             gridCol_Parent_Production_Order_Number.Name = "gridCol_Parent_Production_Order_Number";
@@ -139,21 +141,21 @@ namespace Create_ProductPlan
             gridCol_Production_Pool_ID.Caption = "PRODUCTIONPOOLID";
             gridCol_Production_Pool_ID.FieldName = "PRODUCTIONPOOLID";
             gridCol_Production_Pool_ID.VisibleIndex = 0;
-            gridCol_Production_Pool_ID.Width = 90;
+            gridCol_Production_Pool_ID.Width = 110;
 
             // PRODUCTION SITE ID
             gridCol_Production_Site_ID.Name = "gridCol_Production_Site_ID";
             gridCol_Production_Site_ID.Caption = "PRODUCTIONSITEID";
             gridCol_Production_Site_ID.FieldName = "PRODUCTIONSITEID";
             gridCol_Production_Site_ID.VisibleIndex = 0;
-            gridCol_Production_Site_ID.Width = 92;
+            gridCol_Production_Site_ID.Width = 110;
 
             // PRODUCTION WARE HOUSE ID
             gridCol_Production_Warehouse_ID.Name = "gridCol_Production_Warehouse_ID";
             gridCol_Production_Warehouse_ID.Caption = "PRODUCTIONWAREHOUSEID";
             gridCol_Production_Warehouse_ID.FieldName = "PRODUCTIONWAREHOUSEID";
             gridCol_Production_Warehouse_ID.VisibleIndex = 0;
-            gridCol_Production_Warehouse_ID.Width = 80;
+            gridCol_Production_Warehouse_ID.Width = 114;
 
             // SCHEDULED QUANTITY
             gridCol_Schedule_Quantity.Name = "gridCol_Schedule_Quantity";
@@ -185,7 +187,7 @@ namespace Create_ProductPlan
             gridCol_Default_Ledge_Dimension_Display_Value.Caption = "DEFAULTLEDGERDIMENSIONDISPLAYVALUE";
             gridCol_Default_Ledge_Dimension_Display_Value.FieldName = "DEFAULTLEDGERDIMENSIONDISPLAYVALUE";
             gridCol_Default_Ledge_Dimension_Display_Value.VisibleIndex = 0;
-            gridCol_Default_Ledge_Dimension_Display_Value.Width = 230;
+            gridCol_Default_Ledge_Dimension_Display_Value.Width = 224;
 
             // TKK ADDRESS CODE
             gridCol_Tkk_Address_Code.Name = "gridCol_Tkk_Address_Code";
@@ -326,7 +328,7 @@ namespace Create_ProductPlan
                                 {
                                     DataRow dtrow = tablePlan.NewRow();
                                     dtrow["ITEMNUMBER"] = Convert.ToString(row.Field<string>("Item Code"));
-                                    dtrow["DELIVERYDATE"] = Convert.ToDateTime(columnName).ToString("MM/dd/yyyy");
+                                    dtrow["DELIVERYDATE"] = Convert.ToDateTime(columnName).ToString("dd/MM/yyyy");
                                     dtrow["SCHEDULEDQUANTITY"] = Convert.ToInt16(scheduleQuantity);
                                     dtrow["PRODUCTIONSITEID"] = Convert.ToInt16(radioGroupSiteID.EditValue);
                                     tablePlan.Rows.Add(dtrow);
@@ -338,6 +340,9 @@ namespace Create_ProductPlan
                 }
 
                 gridControl_ProductPlan.DataSource = tablePlan.AsEnumerable().OrderBy(x=>x[1]).CopyToDataTable() ;
+
+                barBtn_ImportDataPlan.Enabled = false;
+                radioGroupSiteID.Enabled = false;
 
                 //SaveFileDialog theoutputDialog = new SaveFileDialog
                 //{
@@ -359,8 +364,10 @@ namespace Create_ProductPlan
 
         private void barBtn_ClearData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            gridControl_ProductPlan.DataSource=null;
-            radioGroupSiteID.EditValue=false;
+            radioGroupSiteID.Enabled = true;
+            radioGroupSiteID.EditValue = false;
+            barBtn_ImportDataPlan.Enabled = true;
+            gridControl_ProductPlan.DataSource = null;
         }
 
         private void barBtn_ImportMasterD365_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -434,17 +441,17 @@ namespace Create_ProductPlan
                         ITEMNUMBER                          = dataRows1.Field<string>("ITEMNUMBER"),
                         SCHEDULEDQUANTITY                   = dataRows1.Field<int>("SCHEDULEDQUANTITY"),
                         PRODUCTIONSITEID                    = dataRows1.Field<int>("PRODUCTIONSITEID"),
-                        PRODUCTIONWAREHOUSEID               = r.Field<string>("PRODUCTIONWAREHOUSEID"),
-                        PRODUCTIONPOOLID                    = r.Field<string>("PRODUCTIONPOOLID"),
-                        SOURCEBOMID                         = r.Field<string>("SOURCEBOMID"),
-                        SOURCEROUTEID                       = r.Field<string>("SOURCEROUTEID"),
-                        DEFAULTLEDGERDIMENSIONDISPLAYVALUE  = r.Field<string>("DEFAULTLEDGERDIMENSIONDISPLAYVALUE"),
-                        TKKADDRESSCODE                      = r.Field<string>("TKKADDRESSCODE"),
-                        TKKISKYB                            = r.Field<string>("TKKISKYB"),
-                        TKKSALESID                          = r.Field<string>("TKKSALESID"),
-                        PRODUCTIONORDERPRIORITY             = r.Field<string>("PRODUCTIONORDERPRIORITY"),
-                        ITEMBATCHNUMBER                     = r.Field<string>("ITEMBATCHNUMBER"),
-                        PARENTPRODUCTIONORDERNUMBER         = r.Field<string>("PARENTPRODUCTIONORDERNUMBER")
+                        PRODUCTIONWAREHOUSEID               = (r == null) ? "" : r.Field<string>("PRODUCTIONWAREHOUSEID"),
+                        PRODUCTIONPOOLID                    = (r == null) ? "" : r.Field<string>("PRODUCTIONPOOLID"),
+                        SOURCEBOMID                         = (r == null) ? "" : r.Field<string>("SOURCEBOMID"),
+                        SOURCEROUTEID                       = (r == null) ? "" : r.Field<string>("SOURCEROUTEID"),
+                        DEFAULTLEDGERDIMENSIONDISPLAYVALUE  = (r == null) ? "" : r.Field<string>("DEFAULTLEDGERDIMENSIONDISPLAYVALUE"),
+                        TKKADDRESSCODE                      = (r == null) ? "" : r.Field<string>("TKKADDRESSCODE"),
+                        TKKISKYB                            = (r == null) ? "" : r.Field<string>("TKKISKYB"),
+                        TKKSALESID                          = (r == null) ? "" : r.Field<string>("TKKSALESID"),
+                        PRODUCTIONORDERPRIORITY             = (r == null) ? "" : r.Field<string>("PRODUCTIONORDERPRIORITY"),
+                        ITEMBATCHNUMBER                     = (r == null) ? "" : r.Field<string>("ITEMBATCHNUMBER"),
+                        PARENTPRODUCTIONORDERNUMBER         = (r == null) ? "" : r.Field<string>("PARENTPRODUCTIONORDERNUMBER")
                     });
 
                 DataTable dt = new DataTable();
@@ -499,13 +506,37 @@ namespace Create_ProductPlan
                 {
                     string path = theoutputDialog.FileName;
 
-                    // Export gridview data to excel type .Xlsx
-                    gridControl_ProductPlan.ExportToXlsx(path);
+                    if (!IsFileOpen(path))
+                    {
+                        // Export gridview data to excel type .Xlsx
+                        gridControl_ProductPlan.ExportToXlsx(path);
 
-                    // Open the created XLSX file with the default application.
-                    Process.Start(path);
+                        // Open the created XLSX file with the default application.
+                        Process.Start(path);
+                    }
                 }
             }
+        }
+
+        public static bool IsFileOpen(string path)
+        {
+            FileStream stream = null;
+            try
+            {
+                stream = File.Open(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            }
+            catch (IOException ex)
+            {
+                if (ex.Message.Contains("File excel đang mở, không ghi đè được."))
+                    return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            return false;
         }
     }
 }
