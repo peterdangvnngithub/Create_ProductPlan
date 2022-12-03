@@ -16,22 +16,22 @@ namespace Create_ProductPlan
 {
     public partial class Form_Main : RibbonForm
     {
-        private GridColumn gridCol_Production_Order_Number = new GridColumn();
-        private GridColumn gridCol_Delivery_Date = new GridColumn();
-        private GridColumn gridCol_Item_Number = new GridColumn();
-        private GridColumn gridCol_Item_Batch_Number = new GridColumn();
-        private GridColumn gridCol_Parent_Production_Order_Number = new GridColumn();
-        private GridColumn gridCol_Production_Pool_ID = new GridColumn();
-        private GridColumn gridCol_Production_Site_ID = new GridColumn();
-        private GridColumn gridCol_Production_Warehouse_ID = new GridColumn();
-        private GridColumn gridCol_Schedule_Quantity = new GridColumn();
-        private GridColumn gridCol_Source_Bom_ID = new GridColumn();
-        private GridColumn gridCol_Source_Route_ID = new GridColumn();
-        private GridColumn gridCol_Default_Ledge_Dimension_Display_Value = new GridColumn();
-        private GridColumn gridCol_Tkk_Address_Code = new GridColumn();
-        private GridColumn gridCol_TKK_Is_KYB = new GridColumn();
-        private GridColumn gridCol_TKK_Sale_Id = new GridColumn();
-        private GridColumn gridCol_Production_Order_Priority = new GridColumn();
+        private readonly GridColumn gridCol_Production_Order_Number = new GridColumn();
+        private readonly GridColumn gridCol_Delivery_Date = new GridColumn();
+        private readonly GridColumn gridCol_Item_Number = new GridColumn();
+        private readonly GridColumn gridCol_Item_Batch_Number = new GridColumn();
+        private readonly GridColumn gridCol_Parent_Production_Order_Number = new GridColumn();
+        private readonly GridColumn gridCol_Production_Pool_ID = new GridColumn();
+        private readonly GridColumn gridCol_Production_Site_ID = new GridColumn();
+        private readonly GridColumn gridCol_Production_Warehouse_ID = new GridColumn();
+        private readonly GridColumn gridCol_Schedule_Quantity = new GridColumn();
+        private readonly GridColumn gridCol_Source_Bom_ID = new GridColumn();
+        private readonly GridColumn gridCol_Source_Route_ID = new GridColumn();
+        private readonly GridColumn gridCol_Default_Ledge_Dimension_Display_Value = new GridColumn();
+        private readonly GridColumn gridCol_Tkk_Address_Code = new GridColumn();
+        private readonly GridColumn gridCol_TKK_Is_KYB = new GridColumn();
+        private readonly GridColumn gridCol_TKK_Sale_Id = new GridColumn();
+        private readonly GridColumn gridCol_Production_Order_Priority = new GridColumn();
 
         DataTable tablePlan = new DataTable();
         DataTable tableMasterD365 = new DataTable();
@@ -262,7 +262,9 @@ namespace Create_ProductPlan
 
         private void barBtn_ImportData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if(!Check_Error())
+            tablePlan.Clear();
+
+            if (!Check_Error())
             {
                 return;
             }   
@@ -324,12 +326,12 @@ namespace Create_ProductPlan
 
                             if (scheduleQuantity != DBNull.Value)
                             {
-                                if(Convert.ToInt16(scheduleQuantity) > 0)
+                                if(Convert.ToInt32(scheduleQuantity) > 0)
                                 {
                                     DataRow dtrow = tablePlan.NewRow();
                                     dtrow["ITEMNUMBER"] = Convert.ToString(row.Field<string>("Item Code"));
-                                    dtrow["DELIVERYDATE"] = Convert.ToDateTime(columnName).ToString("dd/MM/yyyy");
-                                    dtrow["SCHEDULEDQUANTITY"] = Convert.ToInt16(scheduleQuantity);
+                                    dtrow["DELIVERYDATE"] = Convert.ToDateTime(columnName).ToString("dd/MMM/yyyy");
+                                    dtrow["SCHEDULEDQUANTITY"] = Convert.ToInt32(scheduleQuantity);
                                     dtrow["PRODUCTIONSITEID"] = Convert.ToInt16(radioGroupSiteID.EditValue);
                                     tablePlan.Rows.Add(dtrow);
                                 }
@@ -339,7 +341,7 @@ namespace Create_ProductPlan
                     }
                 }
 
-                gridControl_ProductPlan.DataSource = tablePlan.AsEnumerable().OrderBy(x=>x[1]).CopyToDataTable() ;
+                gridControl_ProductPlan.DataSource = tablePlan.AsEnumerable().OrderBy(x=>x[1]).CopyToDataTable();
 
                 barBtn_ImportDataPlan.Enabled = false;
                 radioGroupSiteID.Enabled = false;
@@ -372,6 +374,8 @@ namespace Create_ProductPlan
 
         private void barBtn_ImportMasterD365_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            tableMasterD365.Clear();
+
             //Get link file excel
             OpenFileDialog theinputDialog = new OpenFileDialog
             {
@@ -540,4 +544,3 @@ namespace Create_ProductPlan
         }
     }
 }
-
